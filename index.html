@@ -84,7 +84,6 @@
     #mobileMenu{transition:max-height .3s ease, opacity .3s ease;}
     a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible{outline:2px solid var(--gold); outline-offset:2px;}
 
-    /* تنسيق خانات الفورم لتناسب طابع الموقع الفخم */
     .custom-input {
       width: 100%;
       background: var(--parchment);
@@ -302,7 +301,7 @@
     </div>
   </section>
 
-  <!-- Quote Form Section (مربوط بالـ Google Form في الخلفية) -->
+  <!-- Quote Form Section -->
   <section id="quote-section" class="py-24 px-6 bg-[var(--parchment)]">
     <div class="max-w-3xl mx-auto">
       <div class="text-center mb-12 reveal">
@@ -312,16 +311,14 @@
       </div>
 
       <div class="frame rounded-2xl p-8 md:p-10 reveal" style="background:var(--parchment-2);">
-        <form id="customGoogleForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
+        <form id="customForm" onsubmit="handleFormSubmit(event)" class="space-y-6">
           
           <div class="grid md:grid-cols-2 gap-6">
-            <!-- 1. الاسم -->
             <div>
               <label class="block text-sm font-bold mb-2" style="color:var(--ink)">الاسم الكامل / اسم الشركة <span class="text-red-600">*</span></label>
               <input type="text" id="entry_name" required placeholder="أدخل اسمك الكريِم" class="custom-input">
             </div>
 
-            <!-- 2. الهاتف -->
             <div>
               <label class="block text-sm font-bold mb-2" style="color:var(--ink)">رقم الهاتف / الواتساب <span class="text-red-600">*</span></label>
               <input type="tel" id="entry_phone" required placeholder="01xxxxxxxxx" class="custom-input" dir="ltr">
@@ -329,7 +326,6 @@
           </div>
 
           <div class="grid md:grid-cols-2 gap-6">
-            <!-- 3. نوع الشحنة -->
             <div>
               <label class="block text-sm font-bold mb-2" style="color:var(--ink)">نوع الشحنة / البضاعة <span class="text-red-600">*</span></label>
               <select id="entry_cargo" required class="custom-input">
@@ -341,7 +337,6 @@
               </select>
             </div>
 
-            <!-- 4. طبيعة العملية -->
             <div>
               <label class="block text-sm font-bold mb-2" style="color:var(--ink)">طبيعة العملية الجمركية <span class="text-red-600">*</span></label>
               <select id="entry_operation" required class="custom-input">
@@ -353,7 +348,6 @@
             </div>
           </div>
 
-          <!-- 5. الميناء -->
           <div>
             <label class="block text-sm font-bold mb-2" style="color:var(--ink)">الميناء / المنفذ الجمركي</label>
             <select id="entry_port" class="custom-input">
@@ -367,18 +361,15 @@
             </select>
           </div>
 
-          <!-- 6. ملاحظات -->
           <div>
             <label class="block text-sm font-bold mb-2" style="color:var(--ink)">تفاصيل أو ملاحظات إضافية</label>
             <textarea id="entry_details" rows="3" placeholder="أضف أي تفاصيل أخرى (مثل الوزن التقديري، عدد الحاويات، إلخ...)" class="custom-input"></textarea>
           </div>
 
-          <!-- زر الإرسال -->
           <button type="submit" id="submitBtn" class="w-full bg-[var(--gold)] hover:bg-[var(--gold-light)] text-[var(--onyx)] font-bold py-4 rounded-xl shadow-md transition flex items-center justify-center gap-2 text-lg">
             <i class="fa-solid fa-paper-plane"></i> <span>إرسال الطلب الآن</span>
           </button>
 
-          <!-- رسالة تأكيد الإرسال -->
           <div id="formAlert" class="hidden p-4 rounded-xl text-center font-bold border"></div>
         </form>
       </div>
@@ -423,11 +414,10 @@
         <div>
           <p class="font-semibold mb-2 flex items-center gap-2" style="color:var(--gold-light)"><i class="fa-regular fa-clock"></i> مواعيد العمل</p>
           <p>السبت – الخميس: ٩ص – ٥م</p>
-          <p class="text-white/40 text-xs mt-1"></p>
         </div>
         <div>
           <p class="font-semibold mb-2 flex items-center gap-2" style="color:var(--gold-light)"><i class="fa-solid fa-location-dot"></i> العنوان</p>
-          <p>[فيصل , جيزة]</p>
+          <p>فيصل، الجيزة، مصر</p>
         </div>
         <div>
           <p class="font-semibold mb-2 flex items-center gap-2" style="color:var(--gold-light)"><i class="fa-solid fa-envelope"></i> تواصل</p>
@@ -454,7 +444,7 @@
     <i class="fa-brands fa-whatsapp"></i>
   </a>
 
-  <!-- Script Logic -->
+  <!-- JavaScript Logic -->
   <script>
     // 1. القائمة التفاعلية للموبايل
     const menuBtn = document.getElementById('menuBtn');
@@ -479,7 +469,7 @@
       });
     });
 
-    // 2. أنيميشن ظهور العناصر عند التمرير (Reveal Effect)
+    // 2. أنيميشن ظهور العناصر عند التمرير
     const revealEls = document.querySelectorAll('.reveal');
     if ('IntersectionObserver' in window) {
       const io = new IntersectionObserver((entries) => {
@@ -495,18 +485,9 @@
       revealEls.forEach(el => el.classList.add('in'));
     }
 
-    // 3. كود الجافا سكريبت لإرسال بيانات الاستمارة لـ Google Form في الخلفية
-    const GOOGLE_FORM_ACTION = 'https://script.google.com/macros/s/AKfycbwW5XYWdD-kirv5JwsXeM2xhXWM4FH_dOiKAKxl8mhmV7pgoAdeL7viI-PQindvTPpN/exec';
-
-    // الأكواد الخاصة بالأسئلة من استمارة جوجل
-    const FORM_FIELDS = {
-      name: 'entry.1843338343',      // السؤال 1
-      phone: 'entry.1030018844',     // السؤال 2
-      cargo: 'entry.144410972',      // السؤال 3
-      operation: 'entry.888371302',  // السؤال 4
-      port: 'entry.1983050085',      // السؤال 5
-      details: 'entry.1802909477'    // السؤال 6
-    };
+    // 3. ربط الاستمارة مع Google Apps Script
+    // استبدل الرابط أدناه برابط الـ Web App الخاص بك بعد نشره من Google Apps Script
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwW5XYWdD-kirv5JwsXeM2xhXWM4FH_dOiKAKxl8mhmV7pgoAdeL7viI-PQindvTPpN/exec';
 
     async function handleFormSubmit(event) {
       event.preventDefault();
@@ -514,35 +495,35 @@
       const btn = document.getElementById('submitBtn');
       const alertDiv = document.getElementById('formAlert');
       
-      // تغيير حالة الزرار أثناء الإرسال
       btn.disabled = true;
       btn.style.opacity = '0.7';
       btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> جاري الإرسال...`;
 
-      // تجهيز البيانات
-      const formData = new FormData();
-      formData.append(FORM_FIELDS.name, document.getElementById('entry_name').value);
-      formData.append(FORM_FIELDS.phone, document.getElementById('entry_phone').value);
-      formData.append(FORM_FIELDS.cargo, document.getElementById('entry_cargo').value);
-      formData.append(FORM_FIELDS.operation, document.getElementById('entry_operation').value);
-      formData.append(FORM_FIELDS.port, document.getElementById('entry_port').value || '');
-      formData.append(FORM_FIELDS.details, document.getElementById('entry_details').value || '');
+      // تجميع البيانات
+      const formData = {
+        name: document.getElementById('entry_name').value,
+        phone: document.getElementById('entry_phone').value,
+        cargo: document.getElementById('entry_cargo').value,
+        operation: document.getElementById('entry_operation').value,
+        port: document.getElementById('entry_port').value || 'غير محدد',
+        details: document.getElementById('entry_details').value || 'لا يوجد'
+      };
 
       try {
-        // الإرسال الخفي بدون الخروج من الموقع
-        await fetch(GOOGLE_FORM_ACTION, {
+        await fetch(APPS_SCRIPT_URL, {
           method: 'POST',
-          mode: 'no-cors',
-          body: formData
+          mode: 'no-cors', // لتفادي مشاكل الـ CORS مع أداة جوجل
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData)
         });
 
-        // إظهار تنبيه النجاح
         alertDiv.className = 'p-4 rounded-xl text-center font-bold border bg-emerald-100 border-emerald-500 text-emerald-800';
         alertDiv.innerHTML = '✅ تم إرسال طلب عرض السعر بنجاح! سنتواصل معك في أسرع وقت.';
         alertDiv.classList.remove('hidden');
 
-        // تفريغ الفورم
-        document.getElementById('customGoogleForm').reset();
+        document.getElementById('customForm').reset();
 
       } catch (err) {
         console.error('Error submitting form:', err);
@@ -550,7 +531,6 @@
         alertDiv.innerHTML = '⚠️ حدث خطأ أثناء الإرسال، يرجى المحاولة مرة أخرى أو التواصل معنا عبر الواتساب.';
         alertDiv.classList.remove('hidden');
       } finally {
-        // إعادة إتاحة الزرار
         btn.disabled = false;
         btn.style.opacity = '1';
         btn.innerHTML = `<i class="fa-solid fa-paper-plane"></i> <span>إرسال الطلب الآن</span>`;
